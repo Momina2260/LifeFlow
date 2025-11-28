@@ -66,6 +66,11 @@ namespace LifeFlow
 
                 string qr = "SELECT user_id, user_name, password, role FROM user WHERE email=@Email";
 
+                int userId = 0;
+                string userName = "";
+                string role = "";
+                string storedHashedPassword = "";
+
                 using (MySqlCommand cmd = new MySqlCommand(qr, conn))
                 {
                     cmd.Parameters.AddWithValue("@Email", email);
@@ -74,39 +79,49 @@ namespace LifeFlow
                     {
                         if (reader.Read())
                         {
-                            string storedHashedPassword = reader["password"].ToString();
+                            storedHashedPassword = reader["password"].ToString();
 
                             if (enteredHashedPassword == storedHashedPassword)
                             {
-                                int userId = Convert.ToInt32(reader["user_id"]);
-                                string userName = reader["user_name"].ToString();
-                                string role = reader["role"].ToString();
+                                userId = Convert.ToInt32(reader["user_id"]);
+                                userName = reader["user_name"].ToString();
+                                role = reader["role"].ToString();
 
-                                MessageBox.Show("Login Successful!");
+                                // Store session information
                                 UserSession.UserId = userId;
                                 UserSession.UserName = userName;
                                 UserSession.Role = role;
                                 UserSession.Email = email;
-
-
-                                // PASS user ID to next form
-                                Form1 mainForm = new Form1(userId, userName, role);
-                                mainForm.Show();
-                                this.Hide();
                             }
                             else
                             {
                                 MessageBox.Show("Invalid password!", "Error");
+                                return;
                             }
                         }
                         else
                         {
                             MessageBox.Show("Email not found!", "Error");
+                            return;
                         }
                     }
                 }
+                string updateQr = "UPDATE user SET last_login = NOW() WHERE user_id = @user_id";
+                using (MySqlCommand updatecmd = new MySqlCommand(updateQr, conn))
+                {
+                    updatecmd.Parameters.AddWithValue("@user_id", userId);
+                    updatecmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Login Successful!");
+
+                // Open main form
+                Form1 mainForm = new Form1(userId, userName, role);
+                mainForm.Show();
+                this.Hide();
             }
         }
+
 
 
 

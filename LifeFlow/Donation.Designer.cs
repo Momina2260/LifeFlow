@@ -37,6 +37,9 @@
             dateTimePickerlastDonation = new DateTimePicker();
             comboBoxQuantity = new ComboBox();
             Request_btn = new Button();
+            quantity_lbl = new Label();
+            bloodtype_lbl = new Label();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // DonationText_lbl
@@ -53,7 +56,7 @@
             // 
             comboBoxBloodType.BackColor = Color.FromArgb(255, 128, 128);
             comboBoxBloodType.FormattingEnabled = true;
-            comboBoxBloodType.Location = new Point(90, 272);
+            comboBoxBloodType.Location = new Point(150, 264);
             comboBoxBloodType.Name = "comboBoxBloodType";
             comboBoxBloodType.Size = new Size(182, 33);
             comboBoxBloodType.TabIndex = 1;
@@ -97,7 +100,7 @@
             // Donate_btn
             // 
             Donate_btn.BackColor = Color.FromArgb(255, 128, 128);
-            Donate_btn.Location = new Point(106, 343);
+            Donate_btn.Location = new Point(138, 341);
             Donate_btn.Name = "Donate_btn";
             Donate_btn.Size = new Size(112, 34);
             Donate_btn.TabIndex = 4;
@@ -117,7 +120,7 @@
             // 
             comboBoxQuantity.BackColor = Color.FromArgb(255, 128, 128);
             comboBoxQuantity.FormattingEnabled = true;
-            comboBoxQuantity.Location = new Point(90, 197);
+            comboBoxQuantity.Location = new Point(150, 170);
             comboBoxQuantity.Name = "comboBoxQuantity";
             comboBoxQuantity.Size = new Size(182, 33);
             comboBoxQuantity.TabIndex = 6;
@@ -135,6 +138,40 @@
             Request_btn.UseVisualStyleBackColor = false;
             Request_btn.Click += Request_btn_click;
             // 
+            // quantity_lbl
+            // 
+            quantity_lbl.AutoSize = true;
+            quantity_lbl.BackColor = Color.Transparent;
+            quantity_lbl.Location = new Point(12, 178);
+            quantity_lbl.Name = "quantity_lbl";
+            quantity_lbl.Size = new Size(132, 25);
+            quantity_lbl.TabIndex = 8;
+            quantity_lbl.Text = "bloodQuantity:";
+            quantity_lbl.Click += quantity_lbl_Click;
+            // 
+            // bloodtype_lbl
+            // 
+            bloodtype_lbl.AutoSize = true;
+            bloodtype_lbl.BackColor = Color.Transparent;
+            bloodtype_lbl.Location = new Point(12, 272);
+            bloodtype_lbl.Name = "bloodtype_lbl";
+            bloodtype_lbl.Size = new Size(101, 25);
+            bloodtype_lbl.TabIndex = 8;
+            bloodtype_lbl.Text = "bloodType:";
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.ActiveLinkColor = Color.Red;
+            linkLabel1.AutoSize = true;
+            linkLabel1.LinkColor = Color.FromArgb(192, 64, 0);
+            linkLabel1.Location = new Point(1, -1);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(84, 25);
+            linkLabel1.TabIndex = 9;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "<--home";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            // 
             // Donation
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -142,6 +179,9 @@
             BackgroundImage = Properties.Resources.download__2_;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1015, 450);
+            Controls.Add(linkLabel1);
+            Controls.Add(bloodtype_lbl);
+            Controls.Add(quantity_lbl);
             Controls.Add(Request_btn);
             Controls.Add(comboBoxQuantity);
             Controls.Add(dateTimePickerlastDonation);
@@ -151,6 +191,7 @@
             Controls.Add(Gender_lbl);
             Controls.Add(comboBoxBloodType);
             Controls.Add(DonationText_lbl);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "Donation";
             Text = "Donation";
             Load += Donation_Load;
@@ -169,5 +210,8 @@
         private DateTimePicker dateTimePickerlastDonation;
         private ComboBox comboBoxQuantity;
         private Button Request_btn;
+        private Label quantity_lbl;
+        private Label bloodtype_lbl;
+        private LinkLabel linkLabel1;
     }
 }

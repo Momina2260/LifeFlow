@@ -35,6 +35,7 @@
             lblRequests = new Label();
             topHeaderPanel = new Panel();
             bloodServicesbtn = new Button();
+            logOut_btn = new Button();
             login_btn = new Button();
             label1 = new Label();
             LifeFlowlbl = new Label();
@@ -83,7 +84,7 @@
             requestCountlbl.FlatStyle = FlatStyle.Flat;
             requestCountlbl.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
             requestCountlbl.ForeColor = Color.Firebrick;
-            requestCountlbl.Location = new Point(14, 0);
+            requestCountlbl.Location = new Point(14, 9);
             requestCountlbl.Name = "requestCountlbl";
             requestCountlbl.Size = new Size(162, 48);
             requestCountlbl.TabIndex = 1;
@@ -107,6 +108,7 @@
             topHeaderPanel.BackColor = Color.FromArgb(255, 192, 192);
             topHeaderPanel.BorderStyle = BorderStyle.FixedSingle;
             topHeaderPanel.Controls.Add(bloodServicesbtn);
+            topHeaderPanel.Controls.Add(logOut_btn);
             topHeaderPanel.Controls.Add(login_btn);
             topHeaderPanel.Controls.Add(label1);
             topHeaderPanel.Controls.Add(LifeFlowlbl);
@@ -130,12 +132,26 @@
             bloodServicesbtn.UseVisualStyleBackColor = false;
             bloodServicesbtn.Click += bloodServicesbtn_click;
             // 
+            // logOut_btn
+            // 
+            logOut_btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            logOut_btn.BackColor = Color.FromArgb(192, 64, 0);
+            logOut_btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            logOut_btn.ForeColor = SystemColors.ActiveCaptionText;
+            logOut_btn.Location = new Point(1245, 17);
+            logOut_btn.Name = "logOut_btn";
+            logOut_btn.Size = new Size(114, 46);
+            logOut_btn.TabIndex = 7;
+            logOut_btn.Text = "logOut";
+            logOut_btn.UseVisualStyleBackColor = false;
+            logOut_btn.Click += logOut_btn_click;
+            // 
             // login_btn
             // 
             login_btn.BackColor = Color.FromArgb(192, 64, 0);
             login_btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             login_btn.ForeColor = SystemColors.ActiveCaptionText;
-            login_btn.Location = new Point(11, 11);
+            login_btn.Location = new Point(3, 11);
             login_btn.Name = "login_btn";
             login_btn.Size = new Size(69, 46);
             login_btn.TabIndex = 7;
@@ -341,5 +357,6 @@
         private Panel panel2;
         private Button login_btn;
         private Button bloodServicesbtn;
+        private Button logOut_btn;
     }
 }

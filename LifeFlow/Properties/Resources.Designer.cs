@@ -163,6 +163,16 @@ namespace LifeFlow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap images__2_ {
+            get {
+                object obj = ResourceManager.GetObject("images (2)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngtree_simple_and_unpaid_blood_donation_poster_design_image_195940 {
             get {
                 object obj = ResourceManager.GetObject("pngtree-simple-and-unpaid-blood-donation-poster-design-image_195940", resourceCulture);

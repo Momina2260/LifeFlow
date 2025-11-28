@@ -1,6 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Drawing.Drawing2D;
+using System.Security.Cryptography;
 
 namespace LifeFlow
 {
@@ -153,7 +163,7 @@ namespace LifeFlow
             if (UserSession.UserId == 0)
             {
                 MessageBox.Show("please login first!");
-                loginForm login= new loginForm();
+                loginForm login = new loginForm();
                 login.Show();
                 this.Hide();
             }
@@ -165,7 +175,36 @@ namespace LifeFlow
             }
         }
 
+        private void logOut_btn_click(object sender, EventArgs e)
+        {
+            if (UserSession.UserId == 0)
+            {
+                MessageBox.Show("you cannot logOut when you are not logged in!");
+                return;
+            }
+            else
+            {
+                using (MySqlConnection conn = new MySqlConnection(conString))
+                {
+                    conn.Open();
+                    string updateQr = "update  user set last_logout=Now() where user_id=@user_id";
+                    using (MySqlCommand updatecmd = new MySqlCommand(updateQr, conn))
+                    {
+                        updatecmd.Parameters.AddWithValue("user_id", UserSession.UserId);
+                        updatecmd.ExecuteNonQuery();
+                    }
 
+                    UserSession.ClearSession();
+                    logout logout = new logout();
+                    logout.Show();
+                    this.Hide();
+
+                }
+            }
+            
+            
+        }
     }
 }
+
 

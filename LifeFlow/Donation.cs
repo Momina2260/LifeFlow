@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace LifeFlow
@@ -22,7 +23,9 @@ namespace LifeFlow
 
         private void Donation_Load(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Maximized; // Opens the form full screen
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; // Optional: prevents resizing
+            this.MaximizeBox = false; // Optional: disables maximize button
         }
 
         private void comboBoxBloodType_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace LifeFlow
                 MessageBox.Show("Please select quantity in units!");
                 return;
             }
-           
+
 
             // 1. Get user session
             if (UserSession.UserId == 0)
@@ -100,14 +103,6 @@ namespace LifeFlow
                         int currentQuantity = Convert.ToInt32(reader["quantity"]);
                         reader.Close();
 
-                        // Insert donation
-                        string insertDonation = "INSERT INTO donation(d_date, user_id, b_id) VALUES(@d_date, @user_id, @b_id)";
-                        MySqlCommand cmdInsert = new MySqlCommand(insertDonation, conn);
-                        cmdInsert.Parameters.AddWithValue("@d_date", DateTime.Now);
-                        cmdInsert.Parameters.AddWithValue("@user_id", UserSession.UserId);
-                        cmdInsert.Parameters.AddWithValue("@b_id", bloodId);
-                        cmdInsert.ExecuteNonQuery();
-
                         // Update blood stock
                         string updateBlood = "UPDATE blood SET quantity = quantity + @quantity WHERE b_id=@b_id";
                         MySqlCommand cmdUpdate = new MySqlCommand(updateBlood, conn);
@@ -116,6 +111,21 @@ namespace LifeFlow
                         cmdUpdate.ExecuteNonQuery();
 
                         MessageBox.Show("Donation recorded successfully! Thank you for donating.");
+
+                        // Insert donation
+                        string insertDonation = "INSERT INTO donation(d_date, user_id, b_id) VALUES(@d_date, @user_id, @b_id)";
+                        MySqlCommand cmdInsert = new MySqlCommand(insertDonation, conn);
+                        cmdInsert.Parameters.AddWithValue("@d_date", DateTime.Now);
+                        cmdInsert.Parameters.AddWithValue("@user_id", UserSession.UserId);
+                        cmdInsert.Parameters.AddWithValue("@b_id", bloodId);
+                        cmdInsert.ExecuteNonQuery();
+
+                        string makeDonor = "UPDATE user SET role = 'donar' WHERE user_id = @userId";
+                        MySqlCommand cmdRole = new MySqlCommand(makeDonor, conn);
+                        cmdRole.Parameters.AddWithValue("@userId", UserSession.UserId);
+                        cmdRole.ExecuteNonQuery();
+
+
                     }
                     else
                     {
@@ -180,17 +190,32 @@ namespace LifeFlow
                     cmdInsert.Parameters.AddWithValue("@r_date", DateTime.Now);
                     cmdInsert.Parameters.AddWithValue("@user_id", UserSession.UserId);
                     cmdInsert.Parameters.AddWithValue("@b_id", bloodId);
-             
-                    cmdInsert.ExecuteNonQuery();
+
+                    cmdInsert.ExecuteNonQuery();// i have to show this on home page later
                     MessageBox.Show("Request fulfilled successfully!");
+                    string makeReciever = "UPDATE user SET role = 'reciever' WHERE user_id = @userId";
+                    MySqlCommand cmdRole = new MySqlCommand(makeReciever, conn);
+                    cmdRole.Parameters.AddWithValue("@userId", UserSession.UserId);
+                    cmdRole.ExecuteNonQuery();
                 }
                 else
                 {
                     MessageBox.Show("Blood type not found!");
                 }
             }
-            }
+        }
+
+        private void quantity_lbl_Click(object sender, EventArgs e)
+        {
 
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form1 form = new Form1();
+            form.Show();
+            this.Hide();
+        }
     }
+}
 

@@ -150,7 +150,7 @@ namespace LifeFlow
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("registered successfully! ");
-                        MessageBox.Show("registered successfuly!");
+                        
                         loginForm login = new loginForm();
                         login.Show();
                         this.Hide();
