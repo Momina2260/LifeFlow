@@ -48,6 +48,7 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             label2 = new Label();
             panel2 = new Panel();
+            adminDash_btn = new Button();
             RequestsPanel.SuspendLayout();
             topHeaderPanel.SuspendLayout();
             panel1.SuspendLayout();
@@ -303,10 +304,25 @@
             panel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.BackColor = Color.RosyBrown;
             panel2.Controls.Add(label2);
+            panel2.Controls.Add(adminDash_btn);
             panel2.Location = new Point(0, 515);
             panel2.Name = "panel2";
             panel2.Size = new Size(1364, 62);
             panel2.TabIndex = 6;
+            // 
+            // adminDash_btn
+            // 
+            adminDash_btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            adminDash_btn.BackColor = Color.FromArgb(192, 64, 0);
+            adminDash_btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            adminDash_btn.ForeColor = SystemColors.ActiveCaptionText;
+            adminDash_btn.Location = new Point(1177, 3);
+            adminDash_btn.Name = "adminDash_btn";
+            adminDash_btn.Size = new Size(175, 46);
+            adminDash_btn.TabIndex = 7;
+            adminDash_btn.Text = "adminDashBoard";
+            adminDash_btn.UseVisualStyleBackColor = false;
+            adminDash_btn.Click += adminDash_btn_click;
             // 
             // Form1
             // 
@@ -358,5 +374,6 @@
         private Button login_btn;
         private Button bloodServicesbtn;
         private Button logOut_btn;
+        private Button adminDash_btn;
     }
 }

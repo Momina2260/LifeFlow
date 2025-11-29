@@ -73,6 +73,26 @@ namespace LifeFlow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _360_F_478987727_BLVoXe6RzMgHbzxNIlU3Bz2XodQENCvC1 {
+            get {
+                object obj = ResourceManager.GetObject("360_F_478987727_BLVoXe6RzMgHbzxNIlU3Bz2XodQENCvC1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _360_F_478987727_BLVoXe6RzMgHbzxNIlU3Bz2XodQENCvC2 {
+            get {
+                object obj = ResourceManager.GetObject("360_F_478987727_BLVoXe6RzMgHbzxNIlU3Bz2XodQENCvC2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap download {
             get {
                 object obj = ResourceManager.GetObject("download", resourceCulture);

@@ -201,10 +201,31 @@ namespace LifeFlow
 
                 }
             }
-            
-            
+
+
+        }
+
+        private void adminDash_btn_click(object sender, EventArgs e)
+        {
+            // Admin button logic using UserSession
+            if (UserSession.UserId == 0)
+            {
+                MessageBox.Show("Please login first!");
+                return;
+            }
+
+            if (UserSession.Role.ToLower() == "admin")
+            {
+                adminDashboard dash = new adminDashboard();
+                dash.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Access denied. Only admin can access!");
+            }
+
         }
     }
 }
-
 

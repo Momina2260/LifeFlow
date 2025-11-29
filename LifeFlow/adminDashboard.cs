@@ -30,14 +30,14 @@ namespace LifeFlow
             using (MySqlConnection conn = new MySqlConnection(conString))
             {
                 conn.Open();
-                string qr = "SELECT user_id,user_name,email,role , last_login FROM `user` WHERE user_name LIKE @search OR email LIKE @search OR role like  @search OR last_login LIKE @search  ";
+                string qr = "SELECT user_id,user_name,email,role , last_login FROM `user` WHERE user_name LIKE @search OR email LIKE @search OR role LIKE @search OR last_login LIKE @search  ";
                 using (MySqlCommand cmd = new MySqlCommand(qr, conn))
                 {
                     cmd.Parameters.AddWithValue("@search", "%" + searchText + "%");
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable table = new DataTable();
                     da.Fill(table);
-                   
+
                     dataGridView1.DataSource = table;
                 }
             }
@@ -71,7 +71,10 @@ namespace LifeFlow
         }
         private void adminDashboard_Load(object sender, EventArgs e)
         {
+
             loadUser(); // Load all users initially
+            int totalUsers = getUsersCount();       // Add this
+            UserCount.Text = totalUsers.ToString();
         }
 
 
@@ -87,14 +90,14 @@ namespace LifeFlow
                     cmd.Connection = con;
 
                     // Add Gender filter
-                    if (comboBoxGender.SelectedIndex >= 0)
+                    if (comboBoxGender.SelectedIndex > 0)
                     {
                         query += " AND Gender = @gender";
                         cmd.Parameters.AddWithValue("@gender", comboBoxGender.Text);
                     }
 
                     // Add Role filter
-                    if (comboBoxRole.SelectedIndex >= 0)
+                    if (comboBoxRole.SelectedIndex > 0)
                     {
                         query += " AND role = @role";
                         cmd.Parameters.AddWithValue("@role", comboBoxRole.Text);
@@ -105,6 +108,15 @@ namespace LifeFlow
                     da.Fill(table);
 
                     dataGridView1.DataSource = table;
+                    dataGridView1.Columns["user_id"].DefaultCellStyle.BackColor = Color.LightGray;
+                    dataGridView1.Columns["user_name"].DefaultCellStyle.BackColor = Color.LightGray;
+                    dataGridView1.Columns["email"].DefaultCellStyle.BackColor = Color.LightGray;
+
+                    // Headers
+                    dataGridView1.Columns["user_id"].HeaderCell.Style.BackColor = Color.DarkGray;
+                    dataGridView1.Columns["user_name"].HeaderCell.Style.BackColor = Color.DarkGray;
+                    dataGridView1.Columns["email"].HeaderCell.Style.BackColor = Color.DarkGray;
+
                 }
             }
         }
@@ -112,10 +124,6 @@ namespace LifeFlow
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.DataSource = null;
-            dataGridView1.Columns.Clear();
 
 
 
@@ -148,7 +156,7 @@ namespace LifeFlow
 
         private void label4_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
@@ -159,8 +167,24 @@ namespace LifeFlow
         private void label5_Click(object sender, EventArgs e)
         {
 
-            int total = getUsersCount();
-            UserCount.Text = total.ToString();
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void adminDashboard_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonHome_click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            form.Show();
+            this.Hide();
         }
     }
 }
